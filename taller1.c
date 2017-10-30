@@ -12,16 +12,37 @@ int main()
     char line[MAXLINE]; /* current input line */
     char longest[MAXLINE]; /* longest line saved here */
     max = 0;
-    
+    int opcion;
+    printf("-----------------------------------------------\n");
+    printf("         Tarea Programacion de Sistemas        \n");
+    printf("-----------------------------------------------\n");
+    printf("Por favor ingrese una cadena de caracteres:\n");
+ 
     while ((len = getline2(line, MAXLINE)) > 0)
         if (len > max) {
             max = len;
             copy(longest, line);
         }
-        if (max > 0) /* there was a line */
-            printf("La cadena mas larga es: %s", longest);
-        
-	return 0;
+    if (max > 0) /* there was a line */
+        printf("La cadena mas larga es: %s", longest);
+        do
+        {
+              printf("\nEscoja una de las siguientes opciones del menu:");
+	      printf("\n 1.) Cuantos caracteres tiene la cadena");
+	      printf("\n 2.) Cuantos digitos tiene la cadena");
+              printf("\n 3.) Salir\n");
+              scanf("%d",&opcion);
+	      while(opcion<1 || opcion>3);
+	      switch(opcion)
+	      {
+                    case1: printf("La cadena tiene %d caracteres\n", cuenta(longest)-1);
+		    break;
+		    case2: printf("La cadena tiene %d digitos\n", cuenta_digitos(longest));
+		    break;
+	      }
+	}while(opcion!=3);
+		printf("Terminado\n");
+		return 0;
  
 }
 
@@ -48,4 +69,27 @@ void copy(char to[], char from[])
         ++i;
 }
 
+/* cuenta: cuenta los caracteres de la cadena seleccionada */
+int cuenta(char cadena[])
+{
+    int i;
+    i = 0;
+    while (cadena[i] != '\0')
+        ++i;
+    return i;
+}
 
+/* cuenta_digitos: cuenta los digitos de la cadena seleccionada */
+int cuenta_digitos(char cadena[])
+{
+    int i, digitos;
+    i = 0;
+    digitos = 0;
+    while (cadena[i] != '\0')
+    {
+        if (cadena[i] >= '0' && cadena[i] <= '9')
+            ++digitos;
+        ++i;
+    }
+    return digitos;
+}
